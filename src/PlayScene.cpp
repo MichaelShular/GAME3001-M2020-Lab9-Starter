@@ -131,17 +131,27 @@ void PlayScene::handleEvents()
 	{
 		TheGame::Instance()->changeSceneState(END_SCENE);
 	}
-	if (!m_bKeyPressed[0] && EventManager::Instance().isKeyDown(SDL_SCANCODE_H)) {
-		m_bKeyPressed[0] = true;
+	if (!m_bKeyPressed[H_KEY] && EventManager::Instance().isKeyDown(SDL_SCANCODE_H)) {
+		m_bKeyPressed[H_KEY] = true;
 		m_bDebugToggle = !m_bDebugToggle;
 	}
 	if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H)) {
-		m_bKeyPressed[0] = false;
+		m_bKeyPressed[H_KEY] = false;
 	}
 	if (m_bDebugToggle == true) {
-		if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H)) {
+		if (!m_bKeyPressed[K_KEY] && EventManager::Instance().isKeyDown(SDL_SCANCODE_K)) {
+			m_bKeyPressed[K_KEY] = true;
+			std::cout << "Damage to enemy" << std::endl;
 		}
-		if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H)) {
+		if (EventManager::Instance().isKeyUp(SDL_SCANCODE_K)) {
+			m_bKeyPressed[K_KEY] = false;
+		}
+		if (!m_bKeyPressed[P_KEY] && EventManager::Instance().isKeyDown(SDL_SCANCODE_P)) {
+			m_bKeyPressed[P_KEY] = true;
+			std::cout << "Patrol Mode" << std::endl;
+		}
+		if (EventManager::Instance().isKeyUp(SDL_SCANCODE_P)) {
+			m_bKeyPressed[P_KEY] = false;
 		}
 	}
 }
