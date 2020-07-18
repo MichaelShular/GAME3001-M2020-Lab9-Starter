@@ -3,6 +3,7 @@
 #include "EventManager.h"
 #include "Util.h"
 
+
 PlayScene::PlayScene()
 {
 	PlayScene::start();
@@ -130,14 +131,18 @@ void PlayScene::handleEvents()
 	{
 		TheGame::Instance()->changeSceneState(END_SCENE);
 	}
-	if (!m_bHPressed && EventManager::Instance().isKeyDown(SDL_SCANCODE_H))
-	{
-		m_bHPressed = true;
+	if (!m_bKeyPressed[0] && EventManager::Instance().isKeyDown(SDL_SCANCODE_H)) {
+		m_bKeyPressed[0] = true;
 		m_bDebugToggle = !m_bDebugToggle;
 	}
-	if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H))
-	{
-		m_bHPressed = false;
+	if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H)) {
+		m_bKeyPressed[0] = false;
+	}
+	if (m_bDebugToggle == true) {
+		if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H)) {
+		}
+		if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H)) {
+		}
 	}
 }
 
