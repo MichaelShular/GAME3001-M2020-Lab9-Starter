@@ -27,6 +27,7 @@ public:
 	// keyboard events
 	bool isKeyDown(SDL_Scancode key) const;
 	bool isKeyUp(SDL_Scancode key) const;
+	bool KeyPressed(SDL_Scancode key);
 
 	// mouse events
 	bool getMouseButton(int button_number) const;

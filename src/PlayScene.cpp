@@ -15,7 +15,15 @@ void PlayScene::draw()
 {
 	drawDisplayList();
 
-	Util::DrawLine(m_pPlayer->getTransform()->position, m_pPlaneSprite->getTransform()->position);
+	if (m_bDebugToggle == true) {
+		Util::DrawLine(m_pPlayer->getTransform()->position, m_pPlaneSprite->getTransform()->position);
+		Util::DrawRect(m_pPlayer->getTransform()->position -glm::vec2(m_pPlayer->getWidth() * 0.5, m_pPlayer->getHeight() *0.5), 
+			m_pPlayer->getWidth(), m_pPlayer->getHeight());
+		Util::DrawRect(m_pPlaneSprite->getTransform()->position - glm::vec2(m_pPlaneSprite->getWidth() * 0.5, m_pPlaneSprite->getHeight() * 0.5),
+			m_pPlaneSprite->getWidth(), m_pPlaneSprite->getHeight());
+		Util::DrawRect(m_pObstacle->getTransform()->position - glm::vec2(m_pObstacle->getWidth() * 0.5, m_pObstacle->getHeight() * 0.5),
+			m_pObstacle->getWidth(), m_pObstacle->getHeight());
+	}
 }
 
 void PlayScene::update()
@@ -121,6 +129,15 @@ void PlayScene::handleEvents()
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_2))
 	{
 		TheGame::Instance()->changeSceneState(END_SCENE);
+	}
+	if (!m_bHPressed && EventManager::Instance().isKeyDown(SDL_SCANCODE_H))
+	{
+		m_bHPressed = true;
+		m_bDebugToggle = !m_bDebugToggle;
+	}
+	if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H))
+	{
+		m_bHPressed = false;
 	}
 }
 
